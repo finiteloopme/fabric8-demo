@@ -67,7 +67,7 @@ Create the first Fabric node on *jboss-fuse-fabric-1*.
 
 Join the remaining two nodes to the *root* fabric created above.
 
-```bash
+    ```bash
     # Use a client to connect to the JBoss Fuse container
     bin/client
 
@@ -76,20 +76,20 @@ Join the remaining two nodes to the *root* fabric created above.
 
     # Join the Fabric from jboss-fuse-fabric-3
     fabric:join --zookeeper-password zpasswd --resolver manualip --manual-ip 209.132.179.173 209.132.179.21:2181 root3
-```
+    ```
 
 While trying to join both the containers you will get a prompt with a message like below. Enter *yes* to proceed.
 
-```bash
+    ```bash
     You are about to change the container name. This action will restart the container.
     The local shell will automatically restart, but ssh connections will be terminated.
     The container will automatically join: 209.132.179.21:2181 the cluster after it restarts.
     Do you wish to proceed (yes/no): yes
-```
+    ```
 
 Once all the containers have re-started (it takes time), we will have a 1 node ensemble and 3 nodes in our fabric.
 
-```bash
+    ```bash
     JBossFuse:admin@root> container-list
     [id]   [version]  [type]  [connected]  [profiles]              [provision status]
     root*  1.0        karaf   yes          fabric                  success           
@@ -97,4 +97,4 @@ Once all the containers have re-started (it takes time), we will have a 1 node e
                                            jboss-fuse-full                           
     root2  1.0        karaf   yes          fabric                  success           
     root3  1.0        karaf   yes          fabric                  success           
-```
+    ```
