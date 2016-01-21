@@ -29,8 +29,9 @@ Multiple features can be associated with a given container, allowing the contain
 - [ ] Login to each OS instance and execute the [install-jboss-fuse.sh](https://github.com/finiteloopme/fabric8-demo/blob/master/install-jboss-fuse.sh) command as <kbd>sudo</kbd>
 
     ```bash
-    chmod 755 install.sh
-    sudo ./install.sh
+    # Create a file named install-jboss-fuse.sh using the contents from the above link to install-jboss-fuse.sh
+    chmod 755 install-jboss-fuse.sh
+    sudo ./install-jboss-fuse.sh
     ```
 This will ensure that JBoss Fuse is installed on all the OS instances.
 
@@ -51,12 +52,49 @@ The JBoss Fuse installation is at location <kbd>/opt/jboss/jboss-fuse-full</kbd>
 Create the first Fabric node on *jboss-fuse-fabric-1*.
 
 1. Change the directory to <kbd>/opt/jboss/jboss-fuse-full</kbd>
-2. Start the JBoss Fuse server <kbd>bin/fuse</kbd>
+2. Start the JBoss Fuse server <kbd>bin/start</kbd>
 3. Create the Fabric
 
     ```bash
     # Use a client to connect to the JBoss Fuse container
     bin/client
 
-    # 
+    # Create the root fabric
+    fabric:create --clean -m 209.132.179.21 -r manualip --wait-for-provisioning
+
+    fabric:create --wait-for-provisioning --verbose --clean --new-user fAdmin --new-user-role admin --new-user-password fAdmin --zookeeper-password zpasswd --resolver manualip --manual-ip 209.132.179.21
     ```
+
+Join the remaining two nodes to the *root* fabric created above.
+
+```bash
+    # Use a client to connect to the JBoss Fuse container
+    bin/client
+
+    # Join the Fabric from jboss-fuse-fabric-2
+    fabric:join --zookeeper-password zpasswd --resolver manualip --manual-ip 209.132.179.74 209.132.179.21:2181 root2
+
+    # Join the Fabric from jboss-fuse-fabric-3
+    fabric:join --zookeeper-password zpasswd --resolver manualip --manual-ip 209.132.179.173 209.132.179.21:2181 root3
+```
+
+While trying to join both the containers you will get a prompt with a message like below. Enter *yes* to proceed.
+
+```bash
+    You are about to change the container name. This action will restart the container.
+    The local shell will automatically restart, but ssh connections will be terminated.
+    The container will automatically join: 209.132.179.21:2181 the cluster after it restarts.
+    Do you wish to proceed (yes/no): yes
+```
+
+Once all the containers have re-started (it takes time), we will have a 1 node ensemble and 3 nodes in our fabric.
+
+```bash
+    JBossFuse:admin@root> container-list
+    [id]   [version]  [type]  [connected]  [profiles]              [provision status]
+    root*  1.0        karaf   yes          fabric                  success           
+                                           fabric-ensemble-0000-1                    
+                                           jboss-fuse-full                           
+    root2  1.0        karaf   yes          fabric                  success           
+    root3  1.0        karaf   yes          fabric                  success           
+```

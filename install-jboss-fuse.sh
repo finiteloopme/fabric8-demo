@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 FUSE_ARTIFACT_ID=jboss-fuse-full
-VERSION_JBOSS_FUSE=6.2.1.redhat-086
-MAVEN_REPO=origin-repository.jboss.org/nexus/content/groups/ea
-
+VERSION_JBOSS_FUSE=6.2.1.redhat-090
+#VERSION_JBOSS_FUSE=6.2.0.redhat-133
+MAVEN_REPO=http://origin-repository.jboss.org/nexus/content/groups/ea
+#MAVEN_REPO=https://repository.jboss.org/nexus/content/groups/ea
+#MAVEN_REPO=https://repo.fusesource.com/nexus/content/groups/public
 # Lets fail fast if any command in this script does succeed.
 set -e
 
@@ -14,8 +16,8 @@ mkdir -p /opt/jboss
 cd /opt/jboss
 
 # Download the fuse artifact
-echo "Downloading" http://${MAVEN_REPO}/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${VERSION_JBOSS_FUSE}/${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
-curl -O http://${MAVEN_REPO}/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${VERSION_JBOSS_FUSE}/${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
+echo "Downloading" ${MAVEN_REPO}/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${VERSION_JBOSS_FUSE}/${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
+curl -O ${MAVEN_REPO}/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${VERSION_JBOSS_FUSE}/${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
 jar -xvf ${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
 rm ${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
 mv jboss-fuse-${VERSION_JBOSS_FUSE} ${FUSE_ARTIFACT_ID}
