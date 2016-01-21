@@ -13,7 +13,7 @@
     + **Fabric registry**: replicated database that stores information related to provisioning and managing containers.
         + **Runtime registry**: holds infrastructure information like details of how many machines are actually running, their physical location, and what services are they implementing.
         + **Configuration registry**: holds logical information for the fabric like applications to be deployed and their dependencies
-+ **Ensemble**: is a collection of Fabric servers that collectively maintain the state of the fabric registry.  To guard against network splits in a [quorum-based](http://en.wikipedia.org/wiki/Quorum_(distributed_computing) system, number of Fabrics servers in an Ensemble is always an odd number.
++ **Ensemble**: is a collection of Fabric servers that collectively maintain the state of the fabric registry.  To guard against network splits in a [quorum-based](http://en.wikipedia.org/wiki/Quorum_(distributed_computing)) system, number of Fabrics servers in an Ensemble is always an odd number.
 + **Profile**: is an abstract unit of deployment, holding data required for deploying applications into a Fabric container. Profile is a collection of following:
     + OSGI bundles
     + Required KARAF features/services
