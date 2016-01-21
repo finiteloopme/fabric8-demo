@@ -18,6 +18,7 @@
     + OSGI bundles
     + Required KARAF features/services
     + Configuration data for the container runtime
+
 Multiple features can be associated with a given container, allowing the container to serve multiple purposes.
 
 ## How to Fabric
@@ -36,11 +37,11 @@ This will ensure that JBoss Fuse is installed on all the OS instances.
 ### Sample setup
 Lets setup a three node Fabric.
 
-Host name | Description  |  IP Address
---|--|--
-jboss-fuse-fabric-1  |  Fabric node 1  |  209.132.179.21
-jboss-fuse-fabric-2  |  Fabric node 2  |  209.132.179.74
-jboss-fuse-fabric-3  |  Fabric node 3  |  209.132.179.173
+Host name           | Description   | IP Address
+--------------------|---------------|----------------
+jboss-fuse-fabric-1 | Fabric node 1 | 209.132.179.21
+jboss-fuse-fabric-2 | Fabric node 2 | 209.132.179.74
+jboss-fuse-fabric-3 | Fabric node 3 | 209.132.179.173
 
 ### Demo script
 
