@@ -19,7 +19,7 @@ curl -O http://${MAVEN_REPO}/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${VERSION_JBOSS_
 jar -xvf ${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
 rm ${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
 mv jboss-fuse-${VERSION_JBOSS_FUSE} ${FUSE_ARTIFACT_ID}
-chmod a+x ${FUSE_ARTIFACT_ID}/bin/*
+chmod 755 ${FUSE_ARTIFACT_ID}/bin/*
 
 echo '
 bind.address=0.0.0.0
