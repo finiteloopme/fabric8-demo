@@ -43,6 +43,20 @@ jboss-fuse-fabric-1 | Fabric node 1 | 209.132.179.21
 jboss-fuse-fabric-2 | Fabric node 2 | 209.132.179.74
 jboss-fuse-fabric-3 | Fabric node 3 | 209.132.179.173
 
+The JBoss Fuse installation is at location <kbd>/opt/jboss/jboss-fuse-full</kbd>
+
 ### Demo script
 
-#### Create and setup the
+#### Create and setup the Fabric
+Create the first Fabric node on *jboss-fuse-fabric-1*.
+
+1. Change the directory to <kbd>/opt/jboss/jboss-fuse-full</kbd>
+2. Start the JBoss Fuse server <kbd>bin/fuse</kbd>
+3. Create the Fabric
+
+    ```bash
+    # Use a client to connect to the JBoss Fuse container
+    bin/client
+
+    # 
+    ```

@@ -19,6 +19,8 @@ curl -O http://${MAVEN_REPO}/org/jboss/fuse/${FUSE_ARTIFACT_ID}/${VERSION_JBOSS_
 jar -xvf ${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
 rm ${FUSE_ARTIFACT_ID}-${VERSION_JBOSS_FUSE}.zip
 mv jboss-fuse-${VERSION_JBOSS_FUSE} ${FUSE_ARTIFACT_ID}
+# assuming `whoami` results in cloud-user
+chown -hR cloud-user ${FUSE_ARTIFACT_ID}
 chmod 755 ${FUSE_ARTIFACT_ID}/bin/*
 
 echo '
