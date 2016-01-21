@@ -98,3 +98,44 @@ root*  1.0        karaf   yes          fabric                  success
 root2  1.0        karaf   yes          fabric                  success           
 root3  1.0        karaf   yes          fabric                  success           
 ```
+
+To finish, we will add all our nodes to the ensemble.
+
+```bash
+JBossFuse:admin@root> fabric:ensemble-add root2 root3
+This will change of the zookeeper connection string.
+Are you sure want to proceed(yes/no):yes
+```
+
+Once completed, the nodes will be part of the ensemble.
+
+```bash
+JBossFuse:admin@root> container-list
+[id]   [version]  [type]  [connected]  [profiles]              [provision status]
+root*  1.0        karaf   yes          fabric                  success           
+                                       fabric-ensemble-0000-1                    
+                                       jboss-fuse-full                           
+                                       fabric-ensemble-0001-1                    
+root2  1.0        karaf   yes          fabric                  success           
+                                       fabric-ensemble-0001-2                    
+root3  1.0        karaf   yes          fabric                  success           
+                                       fabric-ensemble-0001-3                    
+```
+
+### Tear down the demo setup
+
+In the *root* container or jboss-fuse-fabric-1, issue the following command to *re-create* the Fabric.
+
+```bash
+JBossFuse:admin@root> fabric:create --wait-for-provisioning --force --zookeeper-password zpasswd --clean
+Waiting for container: root
+Waiting for container root to provision.
+
+# On jboss-fuse-fabric-2
+JBossFuse:admin@root2> fabric:container-delete --force root2
+The list of container names: [root2]
+
+# On jboss-fuse-fabric-3
+JBossFuse:admin@root3> fabric:container-delete --force root3
+The list of container names: [root3]
+```
